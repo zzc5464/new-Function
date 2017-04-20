@@ -29,7 +29,7 @@
      *******************************************************************************/
     // 使用函数的Lambda表达式定义函数，然后调用
     var func = function() {
-        console.log("你好，传智播客");
+        console.log("Hello World");
     };
     func();
 
@@ -101,7 +101,7 @@
 //    将函数作为构造器来使用的语法就是在函数调用前面加上一个new关键字. 如代码：
     // 定义一个构造函数
     var Person = function() {
-        this.name = "传智播客";
+        this.name = "Hello World";
         this.sayHello = function() {
             alert("你好，这里是" + this.name);
         };
