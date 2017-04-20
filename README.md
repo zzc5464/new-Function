@@ -153,3 +153,118 @@
 > 有非常多的运用常见要用到apply,划重点~
 
 > apply经常用来处理数组的计算问题
+## caller
+> 返回函数调用者
+
+> caller的应用场景 主要用于察看函数本身被哪个函数调用
+
+        function fn() {
+        //        判断某函数是否被调用
+                if (fn.caller) {
+                        alert(fn.caller.toString());
+                } else {
+                        alert("函数直接执行");
+                }
+        }
+        function AAAA() {
+                fn();
+        }
+        AAAA();
+## callee
+- 返回正被执行的 Function 对象，也就是所指定的 Function 对象的正文.
+- callee是arguments 的一个属性成员，它表示对函数对象本身的引用
+- arguments.callee.length可以获取实参参数
+> 可以用来判断实参和形参是否一致
+
+> 较常用于递归
+- 什么是递归:一个方法，自己调用自己，用上一次调用得出的结果作为这次的参数
+        
+        //传统的递归
+        var fn=function(n){
+                if(n>0) return n+fn(n-1);
+                return 0;
+        }
+        alert('采用传统方式'+fn(10))
+        
+        
+        
+        //callee的递归方式
+        var fn=(function(n){
+        if(n>0) return n+arguments.callee(n-1);
+        return 0;
+        })(10);
+        alert('采用callee方式:'+fn)
+### 传统方式的缺点:
+1. 破坏了,零重复法则,当一旦函数名称更改,需要更改多处
+2. fn是一个全局变量,fn内部一般使用局部bianliang,而这里是一个全局变量,这是一个潜在的全局变量污染
+- 递归的好处:这样就让代码更加简练。又防止了全局变量的污染.
+
+## constructor
+
+    function Student(name) {
+        this.name = name;
+    }
+    var zhangsan = new Student('张三');
+    if (zhangsan.constructor == Student)
+    document.write("zhangsan是根据构造函数<strong>Student</strong>创造（实例化）出来的"+"<br />");
+> 就是用来判断实例的构造函数是谁的属性.
+
+## prototype
+> 当定义好一个函数的时候,会自动生成一个prototype属性
+
+    var product = function(){}
+
+    /*自动有一个 prototype属性 它是一个对象--- 原型对象*/
+
+    product.prototype.buy=function(){}
+
+    product.prototype={}
+## object
+- object的__proto__指向Function对象的原型
+   
+
+        //Object对象是Function对象的一个实例
+        console.log(Object.__proto__ === Function.prototype)
+        /*Function.prototype对象的原型的__proto__属性指向Object.prototype*/
+        console.log(Function.prototype.__proto__ === Object.prototype)
+        /*object的原型的__proto__属性为null*/
+        console.log(Object.prototype.__proto__ )
+- 总结:一个自定义对象可以访问到Function对象的所有属性和方法，也可以访问到Object对象的所有属性和方法
+## 内置对象的实例指向
+> 全都指向Function.prototype
+
+    console.log(Number.__proto__ === Function.prototype)  // true
+    console.log(Boolean.__proto__ === Function.prototype) // true
+    console.log(String.__proto__ === Function.prototype)  // true
+    console.log(Object.__proto__ === Function.prototype)  // true
+    console.log(Function.__proto__ === Function.prototype) // true
+    console.log(Array.__proto__ === Function.prototype)   // true
+    console.log(RegExp.__proto__ === Function.prototype)  // true
+    console.log(Error.__proto__ === Function.prototype)   // true
+    console.log(Date.__proto__ === Function.prototype)    // true
+    var obj = new Object()
+    /*object的实例指向Object的原型对象*/
+    console.log(obj.__proto__ === Object.prototype)
+## 自定义对象的原型链
+    
+    function Product(){}
+    Product.prototype={
+
+    }
+    var iphone = new Product()
+    console.log(Product.prototype.__proto__)
+- 总结:一个自定义对象可以访问到Function对象的所有属性和方法，也可以访问到Object对象的所有属性和方法
+
+## object.prototype是一切链式循环的终点    老大
+
+## function.prototype可以理解为老二
+
+
+
+
+
+
+
+
+
+
